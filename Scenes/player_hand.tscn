@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://c08vwbhknevt3"]
+
+[ext_resource type="Script" path="res://Scripts/player_hand.gd" id="1_kv7cx"]
+[ext_resource type="PackedScene" uid="uid://vfudruuo076" path="res://Scenes/card_holder.tscn" id="2_dige7"]
+
+[sub_resource type="Environment" id="Environment_o8s41"]
+background_color = Color(1, 1, 1, 1)
+background_canvas_max_layer = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 4.87
+reflected_light_source = 1
+
+[sub_resource type="Curve3D" id="Curve3D_bf3i3"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -5, 0, 0, -2.5, 0, 0, 2.5, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[node name="Hand" type="Node3D"]
+script = ExtResource("1_kv7cx")
+card_holder_scene = ExtResource("2_dige7")
+
+[node name="Gimble" type="Marker3D" parent="."]
+
+[node name="Camera" type="Camera3D" parent="Gimble"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 4.3)
+visible = false
+environment = SubResource("Environment_o8s41")
+fov = 50.0
+
+[node name="Path3D" type="Path3D" parent="Gimble"]
+curve = SubResource("Curve3D_bf3i3")
+
+[node name="CardHolder" parent="Gimble/Path3D" instance=ExtResource("2_dige7")]
+transform = Transform3D(-4.37114e-08, 0.0661817, 0.997774, 0, 0.997774, -0.0661817, -1, -2.89289e-09, -4.36141e-08, 0.438665, 1.48517, 0)

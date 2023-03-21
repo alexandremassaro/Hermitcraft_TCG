@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpjfd6uypkwdr"]
+
+[ext_resource type="Script" path="res://Scripts/card.gd" id="1_348du"]
+[ext_resource type="PackedScene" uid="uid://d1nrqjh5gwuxe" path="res://Assets/Models/card_placeholder.glb" id="1_rgyxt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eqoyf"]
+size = Vector3(2.4, 3, 0.02)
+
+[node name="Card" type="Node3D"]
+script = ExtResource("1_348du")
+
+[node name="MouseOverDetector" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MouseOverDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_eqoyf")
+
+[node name="card_placeholder" parent="." instance=ExtResource("1_rgyxt")]
+
+[connection signal="mouse_entered" from="MouseOverDetector" to="." method="_card_mouse_entered"]
+[connection signal="mouse_exited" from="MouseOverDetector" to="." method="_card_mouse_exited"]
